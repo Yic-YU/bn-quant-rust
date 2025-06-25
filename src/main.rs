@@ -1,6 +1,4 @@
-use bn_btc_price::{symbol_price_ticker::get_coin_price, ticker_24h::{get_24hr_ticker, get_24hr_ticker_json}};
-
-
+use bn_btc_price::symbol_price_ticker::SymbolPriceServer;
 
 
 
@@ -8,14 +6,10 @@ use bn_btc_price::{symbol_price_ticker::get_coin_price, ticker_24h::{get_24hr_ti
 
 #[tokio::main]
 async fn main() {
-    if let Err(e) = get_coin_price().await  {
-        println!("{}",e);
-    }
-    if let Err(e) = get_24hr_ticker().await  {
-        println!("get_24hr_ticker_json{}",e);
-    }
+    let server = SymbolPriceServer::new();
 
-    if let Err(e) = get_24hr_ticker_json().await  {
-        println!("get_24hr_ticker_json{}",e);
+    // server.run().await;
+    if let Err(e) = server.run().await{
+        println!("{}",e);
     }
 }
