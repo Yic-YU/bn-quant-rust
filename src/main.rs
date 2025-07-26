@@ -1,4 +1,4 @@
-use bn_btc_price::symbol_price_ticker::SymbolPriceServer;
+use bn_btc_price::{symbol_price_ticker::SymbolPriceServer, websocket_server::WebSocketServer};
 
 
 
@@ -6,10 +6,15 @@ use bn_btc_price::symbol_price_ticker::SymbolPriceServer;
 
 #[tokio::main]
 async fn main() {
-    let server = SymbolPriceServer::new();
+    // let server = SymbolPriceServer::new();
 
-    // server.run().await;
-    if let Err(e) = server.run().await{
-        println!("{}",e);
+    // // server.run().await;
+    // if let Err(e) = server.run().await{
+    //     println!("{}",e);
+    // }
+    let ws_server = WebSocketServer::new();
+    if let Err(e) = ws_server.run().await {
+        println!("{}", e);
     }
+
 }
